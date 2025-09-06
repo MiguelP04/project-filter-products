@@ -11,11 +11,12 @@ export default function HomePage() {
   const [result, setResult] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [valueSelect, setValueSelect] = useState("All");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchApi() {
       try {
+        setLoading(true);
         const data = await fetchAllProducts();
         setResult(data);
       } catch (error) {
@@ -47,96 +48,9 @@ export default function HomePage() {
         (product) => product.price < parseInt(queryPrice)
       );
     }
-    setTimeout(() => {
-      setFilteredProducts(filtered);
-    }, 500);
+
+    setFilteredProducts(filtered);
   }, [queryTitle, queryPrice, result, valueSelect]);
-
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center mt-32 mb-12">
-        <div className="flex flex-col md:flex-row justify-between gap-6 lg:gap-12 mb-10">
-          <Searchbar
-            filterName={"title"}
-            query={queryTitle}
-            setQuery={setQueryTitle}
-          />
-          <Selectbar
-            valueSelect={valueSelect}
-            setValueSelect={setValueSelect}
-          />
-          <Searchbar
-            filterName={"max price"}
-            query={queryPrice}
-            setQuery={setQueryPrice}
-          />
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-
-          <Skeleton
-            sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
-            variant="rectangular"
-            width={180}
-            height={230}
-          />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col items-center justify-center mt-32 mb-12">
@@ -155,6 +69,76 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {loading && (
+          <>
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+            <Skeleton
+              sx={{ bgcolor: "grey.400", borderRadius: "4px" }}
+              variant="rectangular"
+              width={180}
+              height={230}
+            />
+          </>
+        )}
         <ProductCard filtered={filteredProducts} />
       </div>
     </div>
